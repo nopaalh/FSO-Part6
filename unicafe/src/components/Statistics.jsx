@@ -3,8 +3,8 @@ import { useStatDatas } from "../store/store"
 const Statistics = () => {
 	const { good, neutral, bad } = useStatDatas()
 	const all = good + neutral + bad
-	const average = all === 0 ? 0 : (good - bad) / all
-  const positive = all === 0 ? 0 : (good) / all
+	const average = all === 0 ? 0 : ((good - bad) / all).toPrecision(2)
+	const positive = all === 0 ? 0 : ((good) / all).toPrecision(2) * 100
 
   return (
     <div>
@@ -15,8 +15,8 @@ const Statistics = () => {
           <tr><td>neutral</td><td>{neutral}</td></tr>
           <tr><td>bad</td><td>{bad}</td></tr>
           <tr><td>all</td><td>{all}</td></tr>
-          <tr><td>average</td><td>{average.toPrecision(2)} %</td></tr>
-          <tr><td>positive</td><td>{positive.toPrecision(2)} %</td></tr>
+          <tr><td>average</td><td>{average}</td></tr>
+          <tr><td>positive</td><td>{positive} %</td></tr>
         </tbody>
       </table>
     </div>
