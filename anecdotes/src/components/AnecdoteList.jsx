@@ -1,8 +1,12 @@
 import { useAnecdotes,useAnecdoteAction } from "../store";
-
+import { useEffect } from "react";
 const AnecdoteList = () => {
+	const { addVote,getData } = useAnecdoteAction()
+
+	useEffect(() => {
+		getData()
+	}, [getData])
 	const anecdotes = useAnecdotes()
-	const { addVote } = useAnecdoteAction()
 	return (
 		<>
 			{anecdotes.toSorted(( a,b ) => ( b.votes - a.votes)).map((anecdote) => (
