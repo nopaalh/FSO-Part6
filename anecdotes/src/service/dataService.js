@@ -29,7 +29,24 @@ const createNew = async (content) => {
 	return data
 }
 
+const editData = async (id, content) => {
+	const option = {
+		method: 'PUT',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(content)
+	}
+
+	const response = await fetch(`${baseUrl}/${id}`, option)
+	if (!response.ok) {
+		throw new Error('Failed to update data')
+	}
+
+	const data = await response.json()
+	return data
+}
+
 export default {
 	getAll,
-	createNew
+	createNew,
+	editData
 }

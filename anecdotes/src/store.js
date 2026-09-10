@@ -14,11 +14,16 @@ import backendService from './service/dataService'
 		anecdotes: [],
 		filter: '',
 		actions: {
-			addVote: (id) => set(state => ({
-				anecdotes: state.anecdotes.map(anecdote => (
-					anecdote.id === id ? {...anecdote, votes: anecdote.votes + 1} : anecdote
-				))
-			})),
+			addVote: async (anecdote) => {
+				const updated = { ...anecdote, votes: anecdote.votes + 1 }
+				const data = await backendService.editData(anecdote.id, updated)
+
+				set(state => ({
+					anecdotes: state.anecdotes.map((anecdote) =>
+						anecdote.id === data.id ? data : anecdote
+					)
+				}))
+			},
 			addNew: (content) => set(state => ({
 				anecdotes: [...state.anecdotes, asObject(content)]
 		 	})),
