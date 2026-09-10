@@ -13,6 +13,23 @@ const getAll = async () => {
 	return data
 }
 
+const createNew = async (content) => {
+	const option = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body : JSON.stringify(content)
+	}
+
+	const response = await fetch(baseUrl, option)
+	if (!response.ok) {
+		throw new Error('Failed to create server')
+	}
+
+	const data = await response.json()
+	return data
+}
+
 export default {
-	getAll
+	getAll,
+	createNew
 }

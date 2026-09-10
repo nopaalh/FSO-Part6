@@ -1,12 +1,12 @@
 import { useAnecdoteAction } from "../store";
 
 const AnecdoteForm = () => {
-	const { addNew } = useAnecdoteAction()
+	const { addData } = useAnecdoteAction()
 
 	const addList = (e) => {
 		e.preventDefault()
 		const anecdote = e.target.content.value
-		addNew(anecdote)
+		addData(anecdote)
 		e.target.reset()
 	}
 	return (

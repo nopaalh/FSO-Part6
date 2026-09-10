@@ -28,6 +28,13 @@ import backendService from './service/dataService'
 				set(() => ({
 					anecdotes: datas
 				}))
+			},
+			addData: async (content) => {
+				content = asObject(content)
+				const data = await backendService.createNew(content)
+				set((state) => ({
+					anecdotes: [...state.anecdotes, data]
+				}))
 			}
 
 		},
