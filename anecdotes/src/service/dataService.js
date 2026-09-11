@@ -45,8 +45,21 @@ const editData = async (id, content) => {
 	return data
 }
 
+const removeData = async (id) => {
+	const response = await fetch(`${baseUrl}/${id}`, {
+		method: 'DELETE'
+	})
+
+	if (!response.ok) {
+		throw new Error('Failed to delete anecdote')
+	}
+
+	return id
+}
+
 export default {
 	getAll,
 	createNew,
-	editData
+	editData,
+	removeData
 }

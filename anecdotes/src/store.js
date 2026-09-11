@@ -42,6 +42,14 @@ import useNotificationStore from './notificationStore'
 				set((state) => ({
 					anecdotes: [...state.anecdotes, data]
 				}))
+			},
+			deleteData: async (anecdote) => {
+				await backendService.removeData(anecdote.id)
+
+				set((state) => ({
+					anecdotes: state.anecdotes.filter((a) => anecdote.id !== a.id)
+				}))
+				useNotificationStore.getState().setNotification(`you deleted '${anecdote.content}'`)
 			}
 
 		},
