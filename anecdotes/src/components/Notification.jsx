@@ -1,16 +1,20 @@
-const Notification = () => {
-  const style = {
-    border: "solid",
-    padding: 10,
-    borderWidth: 1,
-    marginBottom: 10,
-  }
+import useNotificationStore from '../notificationStore'
 
-  return (
-    <div style={style} data-testid="notification">
-      render here notification...
-    </div>
-  )
+const Notification = () => {
+	const message = useNotificationStore((state) => state.message)
+
+	if (!message) return null
+
+	return (
+		<div data-testid='notification' style={{
+			border: '1px solid green',
+			padding: '10px',
+			marginBottom: '10px',
+			color: 'green'
+		}}>
+			{message}
+		</div>
+	)
 }
 
 export default Notification

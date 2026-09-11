@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { useShallow } from 'zustand/react/shallow'
 import backendService from './service/dataService'
+import useNotificationStore from './notificationStore'
 
 	const getId = () => (100000 * Math.random()).toFixed(0)
 
@@ -23,6 +24,7 @@ import backendService from './service/dataService'
 						anecdote.id === data.id ? data : anecdote
 					)
 				}))
+				useNotificationStore.getState().setNotification(`you voted '${data.content}'`)
 			},
 			addNew: (content) => set(state => ({
 				anecdotes: [...state.anecdotes, asObject(content)]
